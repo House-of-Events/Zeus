@@ -1,43 +1,18 @@
 services:
   app:
-    build:
-      context: .
-      target: dev
-      args:
-        NODE_ENV: development
-        NPM_TOKEN: ${NPM_TOKEN}
-    container_name: zeus-app
-    ports:
-      - 9000:9000
+    build: .
     environment:
-      NODE_ENV: development
-      DB_HOST: zeus-postgres
-      DB_PORT: 5432
-      DB_NAME: zeus-docker
-      DB_USER: admin
-      DB_PASSWORD: admin
-    command: >
-      sh -c "
-        ./wait-for-it.sh zeus-db:5432 -- yarn db:migrate &&
-        ./wait-for-it.sh zeus-db:5432 -- yarn db:seed &&
-        node_modules/nodemon/bin/nodemon.js ."
-    volumes:
-      - .:/app
-      - /app/node_modules
-    depends_on:
-      - db
-
-  db:
-    image: postgres:15
-    container_name: zeus-db
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: zeus-docker
+      DATABASE_URL: postgres://admin:admin@db:5432/mike-docker
     ports:
-      - 5432:5432
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - "3002:3000"
+    restart: unless-stopped
+    networks:
+      - my-network
 
 volumes:
   postgres_data:
+
+networks:
+  my-network:
+    external: true
+    name: my-network

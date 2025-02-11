@@ -1,5 +1,6 @@
 {
   "name": "zeus",
+  "type": "module",
   "version": "1.0.0",
   "main": "lib/index.js",
   "directories": {
@@ -7,13 +8,19 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon lib/index.js",
     "localdev:start": "docker-compose up --build",
     "localdev:end": "docker-compose down",
     "logs": "docker-compose logs -f",
-    "db:migrate": "knex migrate:latest --env development",
-    "db:seed": "knex seed:run --env development",
+    "db:migrate": "knex migrate:latest",
+    "db:migrate:dev": "knex migrate:latest --env development",
+    "db:migrate:prod": "knex migrate:latest --env production",
+    "db:seed": "knex seed:run",
+    "db:seed:dev": "knex seed:run --env development",
+    "db:seed:prod": "knex seed:run --env production",
+    "db:rollback": "knex migrate:rollback",
     "clean-docker": "docker ps -aq | xargs -r docker stop && docker ps -aq | xargs -r docker rm && docker images -q | xargs -r docker rmi && docker volume ls -q | xargs -r docker volume rm",
-    "pretty": "npx prettier --write ."
+    "format": "npx prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -38,7 +45,7 @@
     "@typescript-eslint/parser": "^8.17.0",
     "eslint-plugin-vue": "^9.32.0",
     "globals": "^15.13.0",
-    "nodemon": "^3.1.7",
+    "nodemon": "^3.1.9",
     "typescript-eslint": "^8.17.0"
   }
 }
