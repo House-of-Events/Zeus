@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon lib/index.js",
+    "start": "nodemon --legacy-watch lib/index.js",
     "localdev:start": "docker-compose up --build",
     "localdev:end": "docker-compose down",
     "logs": "docker-compose logs -f",
@@ -30,12 +30,13 @@
     "@hapi/cookie": "^12.0.1",
     "@hapi/hapi": "^21.3.12",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
     "hapi": "^18.1.0",
     "hapi-auth-cookie": "^10.0.0",
     "joi": "^17.13.3",
     "knex": "^3.1.0",
     "mysql": "^2.18.1",
-    "pg": "^8.13.1",
+    "pg": "^8.13.2",
     "prettier": "^3.4.2",
     "uuid": "^11.0.3"
   },

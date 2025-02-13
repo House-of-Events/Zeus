@@ -24,5 +24,5 @@ RUN chmod +x /app/entrypoint.sh
 # Set the environment variable for NODE_ENV
 ENV NODE_ENV $NODE_ENV
 
-# Use a single CMD instruction
-CMD ["/app/entrypoint.sh"]
+# Use ENTRYPOINT to ensure the script runs with sh
+ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]

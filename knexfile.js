@@ -4,7 +4,7 @@ const baseConfig = {
   client: "postgresql",
   migrations: {
     directory: "./db/migrations",
-    tableName: "knex_migrations_zeus"
+    tableName: "knex_migrations_zeus",
   },
   seeds: {
     directory: "./db/seeds",

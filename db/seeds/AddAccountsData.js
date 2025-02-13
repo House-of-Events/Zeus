@@ -3,27 +3,29 @@
  * @returns { Promise<void> }
  */
 export async function seed(knex) {
-  // Clear existing data to avoid duplicates
   await knex("accounts").del();
 
   // Insert users data
   await knex("accounts").insert([
     {
-      id: "user_123456",
-      name: "Alice Johnson",
+      id: "acc_3f7d02d1f1",
+      first_name: "Alice",
+      last_name: "Smith",
       email: "alice@example.com",
       password: "hashed_password_1",
       created_at: new Date(),
       updated_at: new Date(),
+      api_key: "api_key_1",
     },
     {
-      id: "user_234567",
-      name: "Bob Smith",
+      id: "acc_9b8c212e47",
+      first_name: "Bob",
+      last_name: "Johnson",
       email: "bob@example.com",
       password: "hashed_password_2",
       created_at: new Date(),
       updated_at: new Date(),
+      api_key: "api_key_2",
     },
   ]);
-
 }
