@@ -3,9 +3,10 @@
  * @returns { Promise<void> }
  */
 export async function up(knex) {
-  await knex.schema.createTable("users", function (table) {
-    table.text("id").primary();
-    table.string("name");
+  await knex.schema.createTable("accounts", function (table) {
+    table.string("id").primary();
+    table.string("first_name");
+    table.string("last_name");
     table.string("email").unique();
     table.string("password");
     table.timestamps(true, true);
@@ -17,5 +18,5 @@ export async function up(knex) {
  * @returns { Promise<void> }
  */
 export async function down(knex) {
-  await knex.schema.dropTable("users");
+  await knex.schema.dropTable("accounts");
 }
