@@ -12,7 +12,7 @@ WORKDIR /app
 
 # Copy package files first to leverage Docker cache
 COPY package*.json ./
-RUN yarn install
+RUN npm install
 
 # Copy all project files into the container
 COPY . .
