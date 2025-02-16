@@ -11,6 +11,7 @@
     "start": "nodemon --legacy-watch lib/index.js",
     "localdev:start": "docker-compose up --build",
     "localdev:end": "docker-compose down",
+    "localdev:up": "docker-compose up",
     "logs": "docker-compose logs -f",
     "db:migrate": "knex migrate:latest",
     "db:migrate:dev": "knex migrate:latest --env development",
@@ -27,6 +28,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@hapi/basic": "^7.0.2",
     "@hapi/cookie": "^12.0.1",
     "@hapi/hapi": "^21.3.12",
     "bcryptjs": "^2.4.3",
