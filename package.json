@@ -9,6 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --legacy-watch lib/index.js",
+    "start:prod": "node lib/index.js",
     "localdev:start": "docker-compose up --build",
     "localdev:end": "docker-compose down",
     "localdev:up": "docker-compose up",
