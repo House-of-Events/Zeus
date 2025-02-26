@@ -2,11 +2,10 @@
   "name": "@mananshah998/zeus-api",
   "type": "module",
   "version": "1.0.3",
-  "main": "lib/helper.js",
-  "exports": {
-    "server": "./lib/index.js",
-    "helpers": "./lib/helper.js"
-  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "directories": {
     "lib": "lib"
   },
@@ -29,7 +28,9 @@
     "db:seed:prod": "knex seed:run --env production",
     "db:rollback": "knex migrate:rollback",
     "clean-docker": "docker ps -aq | xargs -r docker stop && docker ps -aq | xargs -r docker rm && docker images -q | xargs -r docker rmi && docker volume ls -q | xargs -r docker volume rm",
-    "format": "npx prettier --write ."
+    "format": "npx prettier --write .",
+    "build": "mkdir -p dist && cp src/*.js dist/",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [],
   "author": "",
