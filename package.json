@@ -1,7 +1,7 @@
 {
   "name": "@mananshah998/zeus-api",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "lib/helper.js",
   "exports": {
     "server": "./lib/index.js",
