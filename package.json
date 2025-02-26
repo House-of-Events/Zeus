@@ -1,11 +1,18 @@
 {
-  "name": "zeus",
+"name": "@mananshah998/zeus-api",
   "type": "module",
-  "version": "1.0.0",
-  "main": "lib/index.js",
+  "version": "1.0.1",
+  "main": "lib/helper.js",
+  "exports" : {
+    "server": "./lib/index.js",
+    "helpers": "./lib/helper.js"
+  },
   "directories": {
     "lib": "lib"
   },
+  "publishConfig": {
+  "access": "public"
+},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --legacy-watch lib/index.js",
