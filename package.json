@@ -1,5 +1,5 @@
 {
-  "name": "@mananshah998/zeus-api",
+"name": "@mananshah998/zeus-api",
   "type": "module",
   "version": "1.0.5",
   "main": "dist/index.js",
