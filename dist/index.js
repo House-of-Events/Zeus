@@ -1,1 +1,5 @@
-export { validateChannelId, getChannelName } from "./helper.js";
+export {
+  validateChannelId,
+  getChannelName,
+  validateIfAlreadySubscribed,
+} from "./helper.js";

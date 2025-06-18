@@ -22,3 +22,26 @@ export const getChannelName = async (id, db) => {
     throw err;
   }
 };
+
+export const validateIfAlreadySubscribed = async (user_id, channel_id, db) => {
+  const subscription = await db.select().where({ user_id, channel_id });
+  if (subscription && subscription.length > 0) {
+    const err = new Error("User is already subscribed to this channel");
+    err.statusCode = 400;
+    err.details = { user_id, channel_id };
+    throw err;
+  }
+};
+
+export const checkIfAccountExists = async (email, db) => {
+  console.log("Checking if account exists:", email);
+  try {
+    const account = await db.select().where({ email });
+    const exists = account.length > 0;
+    console.log(exists ? "Account exists:" : "Account does not exist:", email);
+    return exists;
+  } catch (error) {
+    console.error("Error checking if account exists:", error);
+    throw new Error(`Database error while checking account: ${error.message}`);
+  }
+};

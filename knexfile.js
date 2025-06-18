@@ -70,6 +70,16 @@ const knexConfig = {
       createRetryIntervalMillis: 200,
     },
   },
+  docker: {
+    ...baseConfig,
+    connection: {
+      host: "db",
+      database: "mike-docker",
+      user: "admin",
+      password: "admin",
+      port: 5432,
+    },
+  },
 };
 
 // Validate production config immediately if in production environment
