@@ -1,11 +1,11 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 
 const baseConfig = {
   client: "postgresql",
   migrations: {
     directory: "./db/migrations",
-    tableName: "knex_migrations_zeus"
+    tableName: "knex_migrations_zeus",
   },
   seeds: {
     directory: "./db/seeds",
@@ -18,12 +18,20 @@ const baseConfig = {
 
 // Helper function to validate production config
 const validateProductionConfig = () => {
-  const requiredEnvVars = ['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_PORT'];
-  const missing = requiredEnvVars.filter(varName => !process.env[varName]);
-  
+  const requiredEnvVars = [
+    "DB_HOST",
+    "DB_NAME",
+    "DB_USER",
+    "DB_PASSWORD",
+    "DB_PORT",
+  ];
+  const missing = requiredEnvVars.filter((varName) => !process.env[varName]);
+
   if (missing.length > 0) {
-    console.error('Missing required environment variables:', missing);
-    throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+    console.error("Missing required environment variables:", missing);
+    throw new Error(
+      `Missing required environment variables: ${missing.join(", ")}`,
+    );
   }
 };
 
@@ -35,7 +43,7 @@ const knexConfig = {
       database: "mike-docker",
       user: "admin",
       password: "admin",
-      port: 5431
+      port: 5431,
     },
   },
   production: {
@@ -62,10 +70,20 @@ const knexConfig = {
       createRetryIntervalMillis: 200,
     },
   },
+  docker: {
+    ...baseConfig,
+    connection: {
+      host: "db",
+      database: "mike-docker",
+      user: "admin",
+      password: "admin",
+      port: 5432,
+    },
+  },
 };
 
 // Validate production config immediately if in production environment
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   validateProductionConfig();
 }
 

@@ -1,10 +1,16 @@
 {
-  "name": "zeus",
+  "name": "@mananshah998/zeus-api",
   "type": "module",
-  "version": "1.0.0",
-  "main": "lib/index.js",
+  "version": "1.0.5",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "directories": {
     "lib": "lib"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,14 +21,16 @@
     "localdev:up": "docker-compose up",
     "logs": "docker-compose logs -f",
     "db:migrate": "knex migrate:latest",
-    "db:migrate:dev": "knex migrate:latest --env development",
+    "db:migrate:dev": "knex migrate:latest --env docker",
     "db:migrate:prod": "knex migrate:latest --env production",
     "db:seed": "knex seed:run",
-    "db:seed:dev": "knex seed:run --env development",
+    "db:seed:dev": "knex seed:run --env docker",
     "db:seed:prod": "knex seed:run --env production",
     "db:rollback": "knex migrate:rollback",
     "clean-docker": "docker ps -aq | xargs -r docker stop && docker ps -aq | xargs -r docker rm && docker images -q | xargs -r docker rmi && docker volume ls -q | xargs -r docker volume rm",
-    "format": "npx prettier --write ."
+    "format": "npx prettier --write .",
+    "build": "mkdir -p dist && cp src/*.js dist/",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [],
   "author": "",
