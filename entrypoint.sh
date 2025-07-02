@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Waiting for the database to be ready... in entrypoint.sh"
-while ! pg_isready -h db -p 5432 -U admin -d mike-docker
+while ! pg_isready -h db -p 5432 -U admin -d zeus-docker
 do
     echo "db:5432 - no response"
     sleep 2

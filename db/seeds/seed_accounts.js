@@ -3,7 +3,6 @@
  * @returns { Promise<void> }
  */
 export async function seed(knex) {
-  await knex("subscriptions").del();
   await knex("accounts").del();
 
   // Insert users data
