@@ -10,18 +10,18 @@ export async function up(knex) {
       .string("channel_id")
       .notNullable()
       .references("id")
-      .inTable("channels");
-    table.string("channel_name").notNullable();
+      .inTable("sports_channels");
+    table.string("sport_type").notNullable();
     table.dateTime("subscribed_at").defaultTo(knex.fn.now());
     table.boolean("is_active").defaultTo(true);
     table.timestamps(true, true);
 
     //contraints
-    table.unique(["user_id", "channel_id"]);
+    table.unique(["user_id", "sport_type"]);
 
     //Indexes
     table.index("user_id");
-    table.index("channel_id");
+    table.index("sport_type");
     table.index("is_active");
   });
 }

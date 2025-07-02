@@ -10,6 +10,8 @@ export async function up(knex) {
     table.string("email").unique();
     table.string("password");
     table.timestamps(true, true);
+    table.boolean("deleted").defaultTo(false);
+    table.string("api_key");
   });
 }
 

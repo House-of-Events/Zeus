@@ -1,15 +1,12 @@
 services:
   app:
     build: .
+    depends_on:
+      db:
+        condition: service_healthy
     environment:
-      DATABASE_URL: postgres://admin:admin@db:5432/mike-docker
-      EMAILJS_SERVICE_ID: ${EMAILJS_SERVICE_ID}
-      EMAILJS_TEMPLATE_ID: ${EMAILJS_TEMPLATE_ID}
-      EMAILJS_PUBLIC_KEY: ${EMAILJS_PUBLIC_KEY}
-      EMAILJS_PRIVATE_KEY: ${EMAILJS_PRIVATE_KEY}
+      DATABASE_URL: postgres://admin:admin@db:5432/zeus-docker
       NODE_ENV: docker
-      EMAIL_USER: ${EMAIL_USER}
-      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
       SOCCER_PL_2024_SLACK_CHANNEL_ID: ${SOCCER_PL_2024_SLACK_CHANNEL_ID}
       SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
       SUBSCRIBE_USERS_SLACK_CHANNEL_ID: ${SUBSCRIBE_USERS_SLACK_CHANNEL_ID}
@@ -23,10 +20,29 @@ services:
       - .:/app
       - /app/node_modules
 
+  db:
+    image: postgres:15
+    container_name: zeus-db
+    environment:
+      POSTGRES_DB: zeus-docker
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - 5426:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U admin -d zeus-docker']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+     - my-network
+
 volumes:
   postgres_data:
 
 networks:
   my-network:
-    external: true
     name: my-network
