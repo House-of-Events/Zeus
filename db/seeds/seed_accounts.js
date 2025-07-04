@@ -3,6 +3,8 @@
  * @returns { Promise<void> }
  */
 export async function seed(knex) {
+  // Delete subscriptions first to avoid foreign key constraint violations
+  await knex("subscriptions").del();
   await knex("accounts").del();
 
   // Insert users data
@@ -16,6 +18,8 @@ export async function seed(knex) {
       created_at: new Date(),
       updated_at: new Date(),
       api_key: "api_key_1",
+      is_admin: false,
+      slack_id: "slack_id_1",
     },
     {
       id: "acc_9b8c212e47",
@@ -26,6 +30,8 @@ export async function seed(knex) {
       created_at: new Date(),
       updated_at: new Date(),
       api_key: "api_key_2",
+      is_admin: false,
+      slack_id: "slack_id_2",
     },
   ]);
 }
