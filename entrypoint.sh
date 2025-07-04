@@ -14,6 +14,10 @@ echo "Database is ready. Running migrations and seeds..."
 yarn run db:migrate:dev
 yarn run db:seed:dev
 
+# Run admin seed specifically
+echo "Creating admin user..."
+yarn knex seed:run --env docker --specific=seed_admin.js
+
 # Keep container running
 echo "Starting application..."
 exec yarn start
