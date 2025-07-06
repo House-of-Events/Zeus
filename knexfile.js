@@ -58,6 +58,8 @@ const knexConfig = {
     },
     migrations: {
       directory: './db/migrations',
+      loadExtensions: ['.js'],
+      tableName: 'zeus_migrations',
     },
   },
   docker: {
