@@ -1,22 +1,37 @@
 #!/bin/sh
 
-echo "Waiting for the database to be ready... in entrypoint.sh"
-while ! pg_isready -h db -p 5432 -U admin -d zeus-docker
-do
-    echo "db:5432 - no response"
-    sleep 2
-done
+echo "Starting application in production mode..."
 
-echo "db:5432 - accepting connections"
-echo "Database is ready. Running migrations and seeds..."
+# Check if we're in production environment
+if [ "$NODE_ENV" = "production" ]; then
+    echo "Production environment detected. Using production database configuration."
+    
+    # Run production migrations
+    echo "Running production migrations..."
+    yarn run db:migrate:prod
+    
+    echo "Database setup complete. Starting application..."
+else
+    echo "Development environment detected. Waiting for local database..."
+    
+    # Wait for local database (only in development)
+    while ! pg_isready -h db -p 5432 -U admin -d zeus-docker
+    do
+        echo "db:5432 - no response"
+        sleep 2
+    done
 
-# Run migrations and seeds
-yarn run db:migrate:dev
-yarn run db:seed:dev
+    echo "db:5432 - accepting connections"
+    echo "Database is ready. Running migrations and seeds..."
 
-# Run admin seed specifically
-echo "Creating admin user..."
-yarn knex seed:run --env docker --specific=seed_admin.js
+    # Run development migrations and seeds
+    yarn run db:migrate:dev
+    yarn run db:seed:dev
+
+    # Run admin seed specifically
+    echo "Creating admin user..."
+    yarn knex seed:run --env docker --specific=seed_admin.js
+fi
 
 # Keep container running
 echo "Starting application..."
