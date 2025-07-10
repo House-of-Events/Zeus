@@ -7,7 +7,7 @@ let config = knexConfig[environment];
 
 config = {
   ...config,
-  cliet: "pg",
+  client: "pg",
 };
 
 const db = knex(config);
