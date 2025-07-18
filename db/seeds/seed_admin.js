@@ -28,4 +28,4 @@ export async function seed(knex) {
   } else {
     console.log("Admin user already exists");
   }
-} 
+}

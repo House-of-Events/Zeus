@@ -18,16 +18,15 @@
 //   }
 // };
 
-
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 const baseConfig = {
-  client: 'postgresql',
+  client: "postgresql",
   migrations: {
-    directory: './db/migrations',
+    directory: "./db/migrations",
   },
   seeds: {
-    directory: './db/seeds',
+    directory: "./db/seeds",
   },
   pool: {
     min: 2,
@@ -43,11 +42,11 @@ const knexConfig = {
       database: "zeus-docker",
       user: "admin",
       password: "admin",
-      port: 5426
+      port: 5426,
     },
   },
   production: {
-    client: 'postgresql',
+    client: "postgresql",
     connection: {
       host: process.env.DB_HOST,
       database: process.env.DB_NAME,
@@ -57,9 +56,9 @@ const knexConfig = {
       ssl: { rejectUnauthorized: false },
     },
     migrations: {
-      directory: './db/migrations',
-      loadExtensions: ['.js'],
-      tableName: 'zeus_migrations',
+      directory: "./db/migrations",
+      loadExtensions: [".js"],
+      tableName: "zeus_migrations",
     },
   },
   docker: {

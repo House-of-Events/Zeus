@@ -33,12 +33,12 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./db/migrations:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U admin -d zeus-docker']
+      test: ["CMD-SHELL", "pg_isready -U admin -d zeus-docker"]
       interval: 5s
       timeout: 5s
       retries: 5
     networks:
-     - my-network
+      - my-network
 
 volumes:
   postgres_data:
