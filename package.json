@@ -13,7 +13,9 @@
     "access": "public"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "start": "nodemon --legacy-watch lib/index.js",
     "start:prod": "node lib/index.js",
     "localdev:start": "docker-compose up --build",
@@ -57,12 +59,20 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-typescript": "^7.27.1",
     "@eslint/js": "^9.16.0",
+    "@types/jest": "^30.0.0",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
+    "babel-jest": "^30.0.4",
     "eslint-plugin-vue": "^9.32.0",
     "globals": "^15.13.0",
+    "jest": "^30.0.4",
     "nodemon": "^3.1.9",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.17.0"
   }
 }
