@@ -32,7 +32,7 @@
     "db:rollback": "knex migrate:rollback",
     "clean-docker": "docker ps -aq | xargs -r docker stop && docker ps -aq | xargs -r docker rm && docker images -q | xargs -r docker rmi && docker volume ls -q | xargs -r docker volume rm",
     "format": "npx prettier --write .",
-    "build": "mkdir -p dist && cp src/*.js dist/",
+    "build": "mkdir -p dist && cp -r lib/* dist/",
     "prepublishOnly": "npm run build",
     "sync-secrets": "node scripts/sync-secrets-to-render.js"
   },
